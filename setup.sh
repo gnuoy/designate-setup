@@ -1,5 +1,16 @@
 #!/bin/bash
 
+function build_designate { 
+  cd designate;
+  sed -i -e 's!charm generate!charm build!' tox.ini;
+  make generate;
+}
+function build_designate_bind { 
+  cd designate-bind;
+  sed -i -e 's!charm generate!charm build!' tox.ini;
+  make generate;
+}
+
 mkdir -p trusty
 [ -d designate ] || git clone https://git.launchpad.net/~openstack-charmers/charms/+source/designate
 [ -d designate-bind ] || git clone https://git.launchpad.net/~openstack-charmers/charms/+source/designate-bind
@@ -8,9 +19,10 @@ if [[ $? -eq 0 ]]; then
     export http_proxy=http://squid.internal:3128                              
     export https_proxy=http://squid.internal:3128                              
 fi
-cd designate;
-sed -i -e 's!charm generate!charm build!' tox.ini
-make generate
-cd ../designate-bind
-sed -i -e 's!charm generate!charm build!' tox.ini
-make generate
+# { build_designate; }
+# { build_designate_bind; }
+{
+   cd trusty;
+   [ -f designate ] || ln -s  ../designate/build/trusty/designate/;
+   [ -f designate-bind ] || ln -s  ../designate-bind/build/trusty/designate-bind/;
+}
