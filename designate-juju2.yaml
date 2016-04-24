@@ -1,0 +1,8 @@
+designate:
+  verbose: true 
+  debug: true 
+  nova-domain: 'serverstack.ubuntu.com.'
+  neutron-domain: 'serverstack.ubuntu.com.'
+  nova-domain-email: 'bob@serverstack.ubuntu.com'
+  neutron-domain-email: 'bob@serverstack.ubuntu.com'
+  openstack-origin: cloud:trusty-liberty

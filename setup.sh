@@ -19,10 +19,10 @@ if [[ $? -eq 0 ]]; then
     export http_proxy=http://squid.internal:3128                              
     export https_proxy=http://squid.internal:3128                              
 fi
-# { build_designate; }
-# { build_designate_bind; }
+# ( build_designate; )
+# ( build_designate_bind; )
 {
    cd trusty;
-   [ -f designate ] || ln -s  ../designate/build/trusty/designate/;
-   [ -f designate-bind ] || ln -s  ../designate-bind/build/trusty/designate-bind/;
+   [ -f designate ] || ln -s  ../designate/build/builds/designate;
+   [ -f designate-bind ] || ln -s  ../designate-bind/build/builds/designate-bind;
 }
